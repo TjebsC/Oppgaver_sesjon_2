@@ -1,0 +1,137 @@
+---
+title: "Hjemmelekse sesjon 2"
+author: "Thomas Jebsen"
+date: "19 10 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Oppgave 2
+
+```{r}
+# Eksempel:
+x <- c(10, 20, 30)
+
+trekk_fra_tre <- function(x) {
+  x - 3
+}
+
+trekk_fra_tre(x)
+
+# Nye variabler:
+x <- c(1, 2, 3, 10)
+y <- c(4, 5, 6, 23)
+
+
+# Oppgave 2.1:
+sum_to_tall <- function(x, y) {
+  x + y
+}
+
+
+sum_to_tall(x, y)
+
+```
+## Oppgave 2.2:
+```{r}
+
+gange_to_tall <- function(x, y){
+  x * y
+}
+
+gange_to_tall(x, y)
+```
+## Oppgave 2.3:
+```{r}
+kvadrer_x <- function(x) {
+  x^2
+}
+
+kvadrer_x()
+
+```
+
+Vi får her en feilmelding på at argumentet "x" mangler. Dette er fordi det ikke er gitt en standardverdi til funksjonen. En hotfix på dette, er å angi en standardverdi. Dersom funksjonen skal brukes mye, kan det hjelpe å legge til andre feilmeldinger dersom brukeren feks. forsøke å gi funksjonen en string i stedet for tall
+
+```{r}
+kvadrer_x <- function(x = 2) {
+  x^2
+}
+
+kvadrer_x()
+```
+
+## Oppgave 2.4:
+
+I help-filen kan vi lese at man kan velge en av tre metoder: "pearson", "kendall" og "spearman". Det vil si at vi kan benytte en av de tre forskjellige metodene for å regne korrelasjonen. Det er "pearson" som benyttes dersom ikke "kendall" eller "spearman" er spesifisert.
+
+## Oppgave 2.5:
+
+```{r}
+finnes_to <- function(x){
+  if(2 %in% x){
+    return(TRUE)
+  }
+  FALSE
+}
+
+finnes_to(x)
+finnes_to(y)
+```
+
+## Oppgave 2.6:
+
+Dersom man benytter samme navn som base-funksjoner (eller funksjoner fra andre pakke), overskriver man den funksjonen som ligger der. Det innebærer at man ikke kan benytte de funksjonene på normal måte i etterkant. Det samme gjelder dataset, som mtcars.
+
+## Oppgave 2.7: 
+```{r}
+
+er_partall <- function(x){
+  if(x %% 2 == 0){
+    return(TRUE)
+  }
+  FALSE
+}
+
+er_partall(8)
+er_partall(7)
+```
+Man trenger ikke funksjonen er_oddetall fordi dette kommer ut som FALSE dersom man ikke gir et partall til funksjonen
+
+## Oppgave 2.8
+ifelse er en vektorisert versjon av if. Dersom man har en funksjon som skal avbrytes eller benytte return(), anbefales det å benytte en kombinasjon av if og else. if else brukes i en funksjon eller loop, mens ifelse kan benyttes for en enkel logisk test 
+
+```{r}
+# Med ifelse må man gi tallet selv på forhånd, eller gi den som en variabel
+
+er_partall_ny <- ifelse(8 %% 2 == 0, TRUE, FALSE)
+er_partall_ny
+
+er_partall_ny2 <- function(x){
+  ifelse(x %% 2 == 0, return(TRUE), return(FALSE))
+}
+
+er_partall_ny2(8)
+er_partall_ny2(9)
+
+```
+
+## Oppgave 2.9
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
