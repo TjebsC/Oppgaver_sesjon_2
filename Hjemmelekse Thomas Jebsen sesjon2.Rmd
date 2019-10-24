@@ -127,6 +127,241 @@ er_partall_ny2(9)
 
 
 
+Hopper til oppgave 12 per nå, så fyller jeg evt inn mellomrommet senere
+
+## Oppgave 12
+```{r}
+if (!require(quantmod)) {
+  install.packages("quantmod")
+}
+
+if (!require(reshape)) {
+  install.packages("reshape")
+}
+
+# Last ned aksjedata
+quantmod::getSymbols(c("GOOGL", "AAPL", "FB"), from = "2019-01-01")
+
+# Lag liste av dataframes. Gjør radnavn til kolonne med navn "Dato"
+list_of_df <- map(.x = list(FB = FB, GOOGL = GOOGL, AAPL = AAPL), 
+                  .f = ~(rownames_to_column(.data = as.data.frame(.), 
+                                            var = "Dato")))
+
+# Join alle dfs på Dato
+df_stocks <- reshape::merge_recurse(list_of_df)
+
+
+#Ny funksjon:
+rescale_stocks <- function(columns) {
+  if (class(columns) != "numeric") {
+    return(columns)
+  }
+  columns <- as.vector(columns / columns[1]) * 100
+  return(columns)
+}
+
+# Mapper like så godt på alle kolonner i stedet for å mutate:
+
+df_stocks <- df_stocks %>% map_df(.f = rescale_stocks)
+
+# Plot
+df_stocks %>% 
+  select(Dato, contains("Close")) %>% 
+  pivot_longer(-Dato, names_to = "Stock", values_to = "Close_rescaled") %>% 
+  ggplot(aes(x = as.Date(Dato), y = Close_rescaled, col = Stock, group = Stock)) + 
+  geom_line() + 
+  theme_bw()
+
+
+```
+
+## Oppgave 13
+```{r}
+
+f1 <- function(string, prefix) {
+  substr(string, 1, nchar(prefix)) == prefix
+}
+
+# Nytt navn:
+check_first_char <- f1
+
+
+f2 <- function(x) {
+  if (length(x) <= 1) return(NULL)
+  x[-length(x)]
+}
+
+# Nytt navn:
+remove_last_object <- f2
+
+
+f3 <- function(x, y) {
+  rep(y, length.out = length(x))
+}
+
+# Nytt navn:
+replicate_y_length_of_x <- f3
+
+f4 <- function(x, y, z) {
+  pmin(pmax(x, y), z)
+}
+
+# Nytt navn (veldig fornøyd med denne):
+find_max_of_x_and_y_and_min_of_result_and_z <- f4
+
+```
+
+## Oppgave 14
+
+```{r}
+
+
+
+alphabet_soup <- function(x = NULL) {
+  letters <- paste0(letters, collapse = ", ")
+  letters <- gsub(", ", "", letters)
+  paste0(x, letters, collapse = ", ")
+}
+
+
+calculate_var <- function(x) {
+  x <- sqrt(var(x))
+  return(x)
+}
+
+sd <- calculate_var(x)
+
+
+
+x <- runif(100)
+out <- vector("numeric", length(x))
+out[1] <- x[1]
+for (i in 2:length(x)) {
+  out[i] <- out[i - 1] + x[i]
+}
+
+
+cum <- function(x) {
+  x <- cumsum(x)
+  return(x)
+}
+
+cum(x)
+
+```
+
+
+## Oppgave 15
+
+```{r}
+gange_to_tall <- function(x, y){
+  checkmate::asInteger(c(x, y))
+  x * y
+}
+
+gange_to_tall("z", 4)
+```
+
+
+## Oppgave 16
+
+```{r}
+
+x <- runif(100)
+
+find_max <- function(x){
+  y <- x - max(x)
+  z <- which(y == 0)
+  return(z)
+}
+
+find_max(x)
+which.max(x)
+  
+```
+
+
+## Oppgave 17.1
+
+```{r}
+
+mt_cars_avg <- mtcars %>% map_df(.f= mean)
+
+mt_cars_avg
+```
+
+
+## Oppgave 17.2
+
+```{r}
+# Denne var litt tricky. Hopper litt videre
+
+mt_cars_trim_avg <- map(mtcars, ~ .x %>% quantile(probs =  seq(0.1, 0.9))) 
+
+```
+
+
+## Oppgave 17.3
+
+```{r}
+
+flights <- nycflights13::flights
+
+datatypes <- flights %>%  map(. , .f = class) 
+
+datatypes
+
+```
+
+
+## Oppgave 17.5
+
+```{r}
+
+map(c(1,2,3,4), ~ .x * .x)
+
+map(seq(1,10), ~ .x * .x)
+
+```
+
+## Oppgave 18
+
+```{r}
+x <- mtcars
+
+nice_mean <- function(x){
+ x %>% select_if(is.numeric) %>% summarise_all(mean) %>% DT::datatable()
+}
+x <- mtcars
+
+nice_mean(x)
+```
+
+Se så fint det ble :)
+
+## Oppgave 19
+
+```{r}
+if (!require(ranger)) {
+  install.packages("ranger")
+}
+library(ranger)
+mod_ranger <- ranger(Species ~ ., 
+                     data = iris, 
+                     importance = "permutation")
+
+
+viktig <- importance(mod_ranger) 
+
+ggplot(viktighet, aes(viktighet$`importance(mod_ranger)`)) +
+  geom_bar()
+
+```
+
+
+
+
+
 
 
 
