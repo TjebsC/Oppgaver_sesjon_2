@@ -7,6 +7,17 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+
+
+# JP:
+# Hei! Veldig mye bra her! Helt ok at du hopper over en del av de enklere oppgavene
+# pga dårlig tid, særlig når du åpenbart har fått til de fleste som er litt vanskeligere.
+
+# Ta gjerne en titt på løsningsforslaget til oppgave 19. Tror du kunne
+# fått dem til med litt mer tid. 
+
+
 ```
 
 # Oppgave 2
@@ -57,6 +68,14 @@ kvadrer_x()
 Vi får her en feilmelding på at argumentet "x" mangler. Dette er fordi det ikke er gitt en standardverdi til funksjonen. En hotfix på dette, er å angi en standardverdi. Dersom funksjonen skal brukes mye, kan det hjelpe å legge til andre feilmeldinger dersom brukeren feks. forsøke å gi funksjonen en string i stedet for tall
 
 ```{r}
+
+# JP:
+# Godt svar!
+
+```
+
+
+```{r}
 kvadrer_x <- function(x = 2) {
   x^2
 }
@@ -80,6 +99,12 @@ finnes_to <- function(x){
 
 finnes_to(x)
 finnes_to(y)
+
+# JP:
+# Grei løsning, men husk at "2 %in% x" allerede gir TRUE eller FALSE. Derfor trenger
+# man ikke ha det i en if-statement som kun returnerer TRUE eller FALSE. 
+# Kun "2 %in% x" ville gitt en funksjon som var enklere å lese.
+
 ```
 
 ## Oppgave 2.6:
@@ -98,11 +123,16 @@ er_partall <- function(x){
 
 er_partall(8)
 er_partall(7)
+
+# JP:
+# Samme kommentar som til "finnes_to"
+
 ```
 Man trenger ikke funksjonen er_oddetall fordi dette kommer ut som FALSE dersom man ikke gir et partall til funksjonen
 
 ## Oppgave 2.8
 ifelse er en vektorisert versjon av if. Dersom man har en funksjon som skal avbrytes eller benytte return(), anbefales det å benytte en kombinasjon av if og else. if else brukes i en funksjon eller loop, mens ifelse kan benyttes for en enkel logisk test 
+
 
 ```{r}
 # Med ifelse må man gi tallet selv på forhånd, eller gi den som en variabel
@@ -173,6 +203,9 @@ df_stocks %>%
   theme_bw()
 
 
+# JP:
+# Veldig bra! 
+
 ```
 
 ## Oppgave 13
@@ -208,6 +241,9 @@ f4 <- function(x, y, z) {
 
 # Nytt navn (veldig fornøyd med denne):
 find_max_of_x_and_y_and_min_of_result_and_z <- f4
+
+# JP:
+# Hehe, informativt, men ikke akkurat vakkert navn
 
 ```
 
@@ -260,6 +296,10 @@ gange_to_tall <- function(x, y){
 }
 
 gange_to_tall("z", 4)
+
+# JP:
+# Flott at du tester ut checkmate! :) 
+
 ```
 
 
@@ -277,6 +317,17 @@ find_max <- function(x){
 
 find_max(x)
 which.max(x)
+
+# JP:
+# Veldig lur løsning! 
+# Merk at funksjonen din vil returnere alle verdier som er lik den høyeste, mens
+# which.max() bare returnerer den første. Eksempel:
+# find_max(c(1, 2, 3, 3))
+# which.max(c(1, 2, 3, 3))
+# 
+# Her kommer det an på hva man skal bruke funksjonen til. Dersom du bare vil returnere
+# første som er lik maks (slik som which.max), så kan du fikse det med en "[1]" 
+# i funksjonen din. 
   
 ```
 
@@ -297,6 +348,10 @@ mt_cars_avg
 # Denne var litt tricky. Hopper litt videre
 
 mt_cars_trim_avg <- map(mtcars, ~ .x %>% quantile(probs =  seq(0.1, 0.9))) 
+
+# JP: 
+# Se løsningsforslag. Den er ikke så tricky hvis man kjenner valgene til mean. 
+# Tror du har tenkt litt for komplisert her :)  
 
 ```
 
@@ -335,6 +390,12 @@ nice_mean <- function(x){
 x <- mtcars
 
 nice_mean(x)
+
+
+# JP:
+# Absolutt en fin måte å vise tallene på med DT, særlig i R Markdown eller i Shiny. 
+
+
 ```
 
 Se så fint det ble :)
