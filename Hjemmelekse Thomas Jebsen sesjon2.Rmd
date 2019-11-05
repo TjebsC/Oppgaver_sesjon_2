@@ -13,7 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 # JP:
 # Hei! Veldig mye bra her! Helt ok at du hopper over en del av de enklere oppgavene
 # pga dårlig tid, særlig når du åpenbart har fått til de fleste som er litt vanskeligere.
-
+# 
+# Jeg har lagt til noen kommentarer under markert med "JP". Håper de er nyttige!
+# 
 # Ta gjerne en titt på løsningsforslaget til oppgave 19. Tror du kunne
 # fått dem til med litt mer tid. 
 
@@ -299,6 +301,12 @@ gange_to_tall("z", 4)
 
 # JP:
 # Flott at du tester ut checkmate! :) 
+# Ps: tror forresten det er "assertInteger()" du er ut etter her.
+# 
+# Tips: Ofte er det bedre å sjekke for "numeric" heller enn "integer" eller 
+# "double" --> numeric er mindre streng, og R bryr seg sjeldent med forskjellen
+# på integer og double. 
+# 
 
 ```
 
@@ -327,7 +335,7 @@ which.max(x)
 # 
 # Her kommer det an på hva man skal bruke funksjonen til. Dersom du bare vil returnere
 # første som er lik maks (slik som which.max), så kan du fikse det med en "[1]" 
-# i funksjonen din. 
+# i funksjonen din, slik: `which(y == 0)[1]`.
   
 ```
 
